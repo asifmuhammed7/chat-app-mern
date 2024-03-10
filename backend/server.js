@@ -12,7 +12,7 @@ dotenv.config();
 app.use(express.json()); //to parse the incoming requsts with json payloads (from req.body)
 app.use("/api/auth",authRoutes)
 
-// app.get("/",(req,res)=>{
+// app.get("/",(req,res)=>{ 
 //    //root route http://localhost/
 //     res.send("Hello world!")
 // })
