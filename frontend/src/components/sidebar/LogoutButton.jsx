@@ -11,7 +11,7 @@ const LogoutButton = () => {
         <span className='loading loading-spinner'></span>
       )}
     </div>
-  )
+  ) 
 }
 
 export default LogoutButton
