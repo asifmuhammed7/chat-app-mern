@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {BsSend} from 'react-icons/bs';
 import useSendMessage from '../../hooks/useSendMessage';
-const MessageInput = () => {
+const   MessageInput = () => {
   const {loading,sendMessage} = useSendMessage()
   const [message, setMessage] = useState("");
   const handleSubmit = async (e)=> {
