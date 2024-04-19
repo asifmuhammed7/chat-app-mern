@@ -12,17 +12,23 @@ const MessageContainer = () => {
         // Cleanup function
         return () => setSelectedConversation(null);
     }, []);
-
+    console.log("this is",selectedConversation)
     return (
         <div className="md:min-w-[450px] flex flex-col">
             {!selectedConversation ? (
                 <NoChatSelected />
             ) : (
                 <>
-                    <div className="bg-slate-500 px-4 py-2 mb-2">
-                        <span className="label-text">To:</span>
-                        <span className="text-gray-900 font-bold">Testing</span>
-                    </div>
+                    <div className="bg-slate-500 px-4 py-2 mb-2 flex items-center"> {/* Added flex and items-center */}
+  {selectedConversation && selectedConversation.profilePic && (
+    <img
+      src={selectedConversation.profilePic}
+      alt="Profile"
+      className="profile-pic"
+    />
+  )}
+  <span className="text-gray-900 font-bold ml-2">{selectedConversation ? selectedConversation.fullName : ""}</span> {/* Added ml-2 for margin */}
+</div>
                     <Messages />
                     <MessageInput />
                 </>

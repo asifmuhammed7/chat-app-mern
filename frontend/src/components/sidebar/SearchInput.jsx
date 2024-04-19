@@ -3,17 +3,20 @@ import { IoSearchSharp } from "react-icons/io5";
 import useConversation from '../../store/useConversation';
 import useGetConversation from '../../hooks/useGetConversation';
 import toast from 'react-hot-toast';
+import useSearchList from '../../hooks/useSearchList';
 
 const SearchInput = () => {
   const [search, setSearch] = useState("");
+  const {conversation,getConversations} = useGetConversation()
   const { setSelectedConversation } = useConversation();
-  const { conversations } = useGetConversation();
+  
+  const {searchUser} = useSearchList();
 
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!search) {
       toast.error('Please enter a search term');
@@ -23,12 +26,14 @@ const SearchInput = () => {
       toast.error('Search term must be at least 3 characters long');
       return;
     }
-    const conversation = conversations.find((c) =>
-      c.fullName.toLowerCase().includes(search.toLowerCase())
-    );
-    if (conversation) {
-      setSelectedConversation(conversation);
+    const searchUsers = searchUser.find((s) =>
+      s.username.toLowerCase().includes(search.toLowerCase())
+    ); 
+    console.log(searchUsers);
+     if (searchUsers) {
+      setSelectedConversation(searchUsers);
       setSearch("");
+      await getConversations()
     } else {
       toast.error('No user found');
     }

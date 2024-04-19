@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {BsSend} from 'react-icons/bs';
 import useSendMessage from '../../hooks/useSendMessage';
+import useGetConversation from '../../hooks/useGetConversation';
 const   MessageInput = () => {
   const {loading,sendMessage} = useSendMessage()
   const [message, setMessage] = useState("");
@@ -9,6 +10,7 @@ const   MessageInput = () => {
     if(!message) return;
     await sendMessage(message);
     setMessage("");
+    
   }
   return (
     <div>
