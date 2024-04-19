@@ -7,10 +7,10 @@ import useSearchList from '../../hooks/useSearchList';
 
 const SearchInput = () => {
   const [search, setSearch] = useState("");
-  const {conversation,getConversations} = useGetConversation()
+  const { conversation, getConversations } = useGetConversation()
   const { setSelectedConversation } = useConversation();
-  
-  const {searchUser} = useSearchList();
+
+  const { searchUser } = useSearchList();
 
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -28,9 +28,9 @@ const SearchInput = () => {
     }
     const searchUsers = searchUser.find((s) =>
       s.username.toLowerCase().includes(search.toLowerCase())
-    ); 
+    );
     console.log(searchUsers);
-     if (searchUsers) {
+    if (searchUsers) {
       setSelectedConversation(searchUsers);
       setSearch("");
       await getConversations()

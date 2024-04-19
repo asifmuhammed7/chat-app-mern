@@ -3,37 +3,37 @@ import toast from "react-hot-toast";
 import useConversation from "../store/useConversation";
 import useGetConversation from "./useGetConversation";
 
-const useSendMessage = ()=>{
+const useSendMessage = () => {
 
-    const [loading,setLoading] = useState(false);
-    const {messages,setMessages, selectedConversation} = useConversation();
+    const [loading, setLoading] = useState(false);
+    const { messages, setMessages, selectedConversation } = useConversation();
 
-    const sendMessage = async(message)=>{
+    const sendMessage = async (message) => {
         setLoading(true)
         try {
             console.log(selectedConversation)
-            const res = await fetch(`/api/messages/send/${selectedConversation._id}`,{
+            const res = await fetch(`/api/messages/send/${selectedConversation._id}`, {
                 method: "POST",
-                headers :{
-                    "Content-Type":"application/json"
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                body:JSON.stringify({message})
+                body: JSON.stringify({ message })
             })
-            
+
             const data = await res.json()
-            
-            if(data.error) throw new Error(data.error)
-            setMessages([...messages,data.newMessage]);
-            
-            
+
+            if (data.error) throw new Error(data.error)
+            setMessages([...messages, data.newMessage]);
+
+
         } catch (error) {
             toast.error(error.message)
-        }finally{
+        } finally {
             setLoading(false)
         }
 
     }
-    return {loading, sendMessage}
+    return { loading, sendMessage }
 }
 
 

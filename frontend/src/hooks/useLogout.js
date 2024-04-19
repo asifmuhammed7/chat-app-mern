@@ -4,30 +4,30 @@ import { useAuthContext } from "../context/AuthContext"
 
 
 
-const useLogout = ()=>{
-    const [loading,setLoading] = useState(false)
-        const {setAuthUser} = useAuthContext()
-    const logout = async ()=>{
+const useLogout = () => {
+    const [loading, setLoading] = useState(false)
+    const { setAuthUser } = useAuthContext()
+    const logout = async () => {
         setLoading(true)
         try {
-            
-            const res = await fetch("/api/auth/logout",{
+
+            const res = await fetch("/api/auth/logout", {
                 method: "POST",
-                headers:{"Content-type":"application/json"},
+                headers: { "Content-type": "application/json" },
             })
             const data = await res.json()
-            if(data.error){
-                throw new  Error(data.error)
+            if (data.error) {
+                throw new Error(data.error)
             }
             localStorage.removeItem("chatUser")
             setAuthUser(null)
         } catch (error) {
             toast.error(error.message)
-        } finally{
+        } finally {
             setLoading(false)
         }
     }
-    return {loading,logout}
+    return { loading, logout }
 }
 
 export default useLogout
